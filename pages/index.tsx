@@ -1,19 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, Play, RotateCcw, Volume2 } from 'lucide-react';
 
+interface Player {
+  id: number;
+  position: number;
+  color: string;
+  name: string;
+}
+
 const SnakeAndLadderGame = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState(4);
-  const [players, setPlayers] = useState([
-    { id: 1, position: 0, color: 'bg-red-500', name: 'Player 1' },
-    { id: 2, position: 0, color: 'bg-blue-500', name: 'Player 2' },
-    { id: 3, position: 0, color: 'bg-green-500', name: 'Player 3' },
-    { id: 4, position: 0, color: 'bg-yellow-500', name: 'Player 4' }
-  ]);
+const [players, setPlayers] = useState<Player[]>([
+  { id: 1, position: 0, color: 'bg-red-500', name: 'Player 1' },
+  { id: 2, position: 0, color: 'bg-blue-500', name: 'Player 2' },
+  { id: 3, position: 0, color: 'bg-green-500', name: 'Player 3' },
+  { id: 4, position: 0, color: 'bg-yellow-500', name: 'Player 4' }
+]);
   
   const [currentPlayer, setCurrentPlayer] = useState(0);
   const [diceValue, setDiceValue] = useState(1);
   const [gameStarted, setGameStarted] = useState(false);
-  const [winner, setWinner] = useState(null);
+ const [winner, setWinner] = useState<Player | null>(null);
   const [message, setMessage] = useState('Select number of players and press Start!');
   const [isRolling, setIsRolling] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
